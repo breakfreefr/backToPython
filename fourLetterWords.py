@@ -1,5 +1,13 @@
 # read in the dictionary and make a list of four letter words.
 
+'''
+Paul Smith returning to python after a couple of years
+This is a very simple exercise to get my feet wet and 
+do something relatively simple yet fun.
+
+saved on github.com with user breakfreefr !
+'''
+
 import random
 
 dictionaryFilename='/usr/share/dict/words'
