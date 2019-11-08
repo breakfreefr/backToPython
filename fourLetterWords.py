@@ -1,30 +1,43 @@
-# read in the dictionary and make a list of four letter words.
+#!python3 -tt
+# # read in the dictionary and make a list of random 2 3 4 5 letter words.
+## first refactor code to have a proper main
 
 '''
-Paul Smith returning to python after a couple of years
-This is a very simple exercise to get my feet wet and 
-do something relatively simple yet fun.
-
 saved on github.com with user breakfreefr !
+
+this is a refactored version ....
 '''
 
 import random
+import re
 
-dictionaryFilename='/usr/share/dict/words'
+def openDict():
 
-file = open(dictionaryFilename, 'rU')
-fourWordList = []
-for word in file:
-    if len(word) == 6: # file has cr at each line end.
-        fourWordList.append(word[0:5])
-file.close()
+    dictionaryFilename='/usr/share/dict/words'
 
-countFourLetters = len(fourWordList)
-print 'four lettered words in dictionary is :', countFourLetters
+    file = open(dictionaryFilename, 'r')
+    fourWordList = []
+    for word in file:
+        if len(word) == 5: # file has cr at each line end.
+            fourWordList.append(word[0:])
+    file.close()
 
-def randomFourWord():
-    wordN=random.randint(1,countFourLetters)
+    countFourLetters = len(fourWordList)
+    print ('four lettered words in dictionary are :', countFourLetters)
+    return fourWordList
+
+def randomFourWord(fourWordList):
+    wordN = random.randint(1,len(fourWordList))
     return fourWordList[wordN]
 
-for noOfWords in range(1,5):
-    print randomFourWord() + "-" + randomFourWord() + "-" + randomFourWord()
+
+def main():
+
+    fourwordlist = openDict()
+    for noOfWords in range(1,5):
+        print (randomFourWord(fourwordlist) + "-" + randomFourWord(fourwordlist) + "-" + randomFourWord(fourwordlist))
+
+
+# This is the standard boilerplate that calls the main() function.
+if __name__ == '__main__':
+  main()
