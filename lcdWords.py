@@ -9,8 +9,22 @@
 #
 import I2C_LCD_driver
 from time import *
+import minijib
 
-mylcd = I2C_LCD_driver.lcd()
+def main():
 
-mylcd.lcd_display_string("hello",1)
-mylcd.lcd_display_string("hello freddy",2)
+    mylcd = I2C_LCD_driver.lcd()
+
+    mylcd.lcd_display_string("hello",1)
+    mylcd.lcd_display_string("hello freddy",2)
+
+
+    theWords = minijib.getWords()
+    combinedList=minijib.getCombinedList(theWords)
+    minijib.printSummary(theWords, combinedList)
+
+    mylcd.lcd_display_string(getPhrase(combinedList))
+    print()
+
+if __name__ == '__main__':
+  main()
