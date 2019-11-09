@@ -23,7 +23,7 @@ def main():
     combinedList=minijib.getCombinedList(theWords)
     minijib.printSummary(theWords, combinedList)
 
-    mylcd.lcd_display_string(getPhrase(combinedList))
+    mylcd.lcd_display_string(minijib.getPhrase(combinedList))
     print()
 
 if __name__ == '__main__':
