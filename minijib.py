@@ -67,9 +67,9 @@ def getPhrase(wordList):
     w1 = getRandomWord(wordList)
     w2 = getRandomWord(wordList)
     w3 = getRandomWord(wordList)
-    w4 = getRandomWord(wordList)
+    #w4 = getRandomWord(wordList)
 
-    phrase = w1 + '-' + w2 + '-' + w3 + '-' + w4 
+    phrase = w1 + '-' + w2 + '-' + w3 # + '-' + w4 
     return phrase
 
 def main():
