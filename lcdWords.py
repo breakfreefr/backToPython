@@ -16,20 +16,20 @@ def main():
 
     mylcd = I2C_LCD_driver.lcd()
 
-    mylcd.lcd_display_string("hello",1)
-    mylcd.lcd_display_string("hello freddy",2)
+    newPhrase = 'mini jibberish !!!'
 
+    mylcd.lcd_display_string(newPhrase,1)
+    mylcd.lcd_display_string("vs Sat 9 Nov 19",2)
 
     theWords = minijib.getWords()
     combinedList=minijib.getCombinedList(theWords)
     minijib.printSummary(theWords, combinedList)
 
-    newPhrase = 'mini jibberish !!!'
     while True:
         oldPhrase = newPhrase
         newPhrase = minijib.getPhrase(combinedList)
-        mylcd.lcd_display_string(newPhrase),1)
-        mylcd.lcd_display_string(oldPhrase),2)
+        mylcd.lcd_display_string(newPhrase,1)
+        mylcd.lcd_display_string(oldPhrase,2)
         
         sleep(5)
 
