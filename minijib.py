@@ -10,6 +10,7 @@ this is a refactored version ....
 
 import random
 import re
+import sys
 
 def getWords():
 
@@ -61,20 +62,24 @@ def getRandomWord(wordList):
 
     return aWord
 
+def getPhrase(wordList):
+
+    w1 = getRandomWord(wordList)
+    w2 = getRandomWord(wordList)
+    w3 = getRandomWord(wordList)
+    w4 = getRandomWord(wordList)
+
+    phrase = w1 + '-' + w2 + '-' + w3 + '-' + w4 
+    return phrase
+
 def main():
 
     theWords = getWords()
     combinedList=getCombinedList(theWords)
     printSummary(theWords, combinedList)
     print()
-
     for noOfPhrases in range(1,10):
-        w1 = getRandomWord(combinedList)
-        w2 = getRandomWord(combinedList)
-        w3 = getRandomWord(combinedList)
-        w4 = getRandomWord(combinedList)
-
-        print(w1 + '-' + w2 + '-' + w3 + '-' + w4 )
+        print(getPhrase(combinedList))
         print()
 
 # This is the standard boilerplate that calls the main() function.
