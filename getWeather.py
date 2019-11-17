@@ -37,7 +37,8 @@ def getWeather(apikey, cityId):
   #print(r.content)
   weatherDict = json.loads(r.content)
   temperature = round(weatherDict["main"]["temp"] - 273,1)
-  return temperature
+  weatherDescription = weatherDict["weather"][0]["description"]
+  return temperature, weatherDescription
 
 
 def main():
@@ -45,7 +46,7 @@ def main():
   (apikey, cities) = getKeyAndCities()
   for city in cities:
     cityid = cities[city]
-    print(city, getWeather(apikey,cityid), 'C')
+    print(city, getWeather(apikey,cityid))
     #t = getWeather(apikey,cityid)
     #print(t)
 
