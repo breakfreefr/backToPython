@@ -24,7 +24,6 @@ def getKeyAndCities():
   f=open('../keys/openweather.json')
   j=f.read()
   f.close()
-  #print(j)
   jdict = json.loads(j)
   apikey = jdict["key"]
   citiesList = jdict["cities"]
@@ -35,9 +34,15 @@ def getWeather(apikey, cityId):
   #print("https://api.openweathermap.org/data/2.5/weather?id=" + cityId + "&appid=" + apikey)
   r = requests.get("https://api.openweathermap.org/data/2.5/weather?id=" + cityId + "&appid=" + apikey)
   #print(r.content)
-  weatherDict = json.loads(r.content)
-  temperature = round(weatherDict["main"]["temp"] - 273,1)
-  weatherDescription = weatherDict["weather"][0]["description"]
+ # weatherDict = json.loads(r.content)
+  weatherDict = r.json()
+  if r.status_code == 200:  
+    temperature = round(weatherDict["main"]["temp"] - 273,1)
+    weatherDescription = weatherDict["weather"][0]["description"]
+  else:
+    print('error from server', r.status_code)
+    exit(1)
+
   return temperature, weatherDescription
 
 
