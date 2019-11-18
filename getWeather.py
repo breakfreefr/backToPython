@@ -19,6 +19,7 @@ along with the cities and the cityId
 '''
 import json
 import requests
+import time
 
 def getKeyAndCities():
   f=open('../keys/openweather.json')
@@ -39,6 +40,9 @@ def getWeather(apikey, cityId):
   if r.status_code == 200:  
     temperature = round(weatherDict["main"]["temp"] - 273,1)
     weatherDescription = weatherDict["weather"][0]["description"]
+    sunrise = time.ctime(weatherDict['sys']['sunrise'])
+    sunset = time.ctime(weatherDict['sys']['sunset'])
+    print(sunrise, sunset)
   else:
     print('error from server', r.status_code)
     exit(1)
@@ -52,8 +56,6 @@ def main():
   for city in cities:
     cityid = cities[city]
     print(city, getWeather(apikey,cityid))
-    #t = getWeather(apikey,cityid)
-    #print(t)
 
 
 # This is the standard boilerplate that calls the main() function.
