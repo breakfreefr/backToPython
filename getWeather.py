@@ -32,17 +32,20 @@ def getKeyAndCities():
 
 def getWeather(apikey, cityId):
 
-  #print("https://api.openweathermap.org/data/2.5/weather?id=" + cityId + "&appid=" + apikey)
-  r = requests.get("https://api.openweathermap.org/data/2.5/weather?id=" + cityId + "&appid=" + apikey)
+  #print("https://api.openweathermap.org/data/2.5/weather?id=" + cityId + "&units=metric&appid=" + apikey)
+  r = requests.get("https://api.openweathermap.org/data/2.5/weather?id=" + cityId + "&units=metric&appid=" + apikey)
   #print(r.content)
  # weatherDict = json.loads(r.content)
   weatherDict = r.json()
   if r.status_code == 200:  
-    temperature = round(weatherDict["main"]["temp"] - 273,1)
+    temperature = round(weatherDict["main"]["temp"], 1)
     weatherDescription = weatherDict["weather"][0]["description"]
-    sunrise = time.ctime(weatherDict['sys']['sunrise'])
-    sunset = time.ctime(weatherDict['sys']['sunset'])
+
+    timezoneDelta = weatherDict['timezone']
+    sunrise = time.ctime(weatherDict['sys']['sunrise'] + timezoneDelta)
+    sunset = time.ctime(weatherDict['sys']['sunset'] + timezoneDelta)
     print(sunrise, sunset)
+  
   else:
     print('error from server', r.status_code)
     exit(1)
