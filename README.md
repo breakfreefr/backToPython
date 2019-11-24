@@ -23,8 +23,8 @@ use open weather and api key to get weather for cities listed in the ../key dire
 
 uses https://ipgeolocation.io and api key to get sunrise, sunset, moonrise, moonset for listed cities in key file
 
-which should be in format 
-'''
+which should be in format :
+```
 {
   "comment": "key info to get sun and moon rising and setting",
   "baseUrl": "https://api.ipgeolocation.io/astronomy",
@@ -34,4 +34,4 @@ which should be in format
     {"city": "Geneva", "latitude": "46.2044", "longitude": "6.1432"}
   ]
 }
-'''
+```
