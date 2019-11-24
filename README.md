@@ -19,3 +19,19 @@ will write new set of phrases to the lcd module every second, scrolling down.
 
 use open weather and api key to get weather for cities listed in the ../key directory 
 
+**getAstroInfo**
+
+uses https://ipgeolocation.io and api key to get sunrise, sunset, moonrise, moonset for listed cities in key file
+
+which should be in format 
+'''
+{
+  "comment": "key info to get sun and moon rising and setting",
+  "baseUrl": "https://api.ipgeolocation.io/astronomy",
+  "apikey": APIKEY,
+  "cities": [
+    {"city": "York", "latitude": "53.9600", "longitude": "1.0873"},
+    {"city": "Geneva", "latitude": "46.2044", "longitude": "6.1432"}
+  ]
+}
+'''
