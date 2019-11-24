@@ -17,12 +17,18 @@ along with the cities and the cityId
 
 
 '''
+import sys
 import json
 import requests
 import time
 
 def getKeyAndCities():
-  f=open('../keys/openweather.json')
+
+  scriptpath = sys.path[0]
+  keysrelpath = '../keys/openweather.json'
+  keypath = scriptpath + '/' + keysrelpath
+
+  f=open(keypath)
   j=f.read()
   f.close()
   jdict = json.loads(j)
@@ -58,8 +64,9 @@ def main():
   (apikey, cities) = getKeyAndCities()
   for city in cities:
     cityid = cities[city]
-    print(city, getWeather(apikey,cityid))
-
+    print(city)
+    print(getWeather(apikey,cityid))
+    print()
 
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':
