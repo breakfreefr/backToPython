@@ -3,8 +3,10 @@
 '''
 Gets the sun and moon sunrise time from https://ipgeolocation.io/
 
-nb: api key stored in different directory in a json file and loaded when program run
+nb: api key stored in ../keys/astroinfo.json and loaded when program run
 along with the cities and the lat and long 
+
+note : relative path !!! needs to find absolute directory of where the program is!
 
 {
   "comment": "key info to get sun and moon rising and setting",
@@ -20,14 +22,23 @@ ie https://api.ipgeolocation.io/astronomy?apiKey=API_KEY&lat=-27.4748&long=153.0
 
 '''
 
+import sys
 import json
+
 import requests
 import time
 
 # get api and list of cities
 
 def getKeyAndCities():
-  f=open('../keys/astroinfo.json')
+
+# first ensure that we know where the keys are kept !
+
+  scriptpath = sys.path[0]
+  keysrelpath = '../keys/astroinfo.json'
+  keypath = scriptpath + '/' + keysrelpath
+  
+  f=open(keypath)
   j=f.read()
   f.close()
   astroCoords = json.loads(j)
@@ -49,32 +60,33 @@ def currentRisesSets(astroCoords):
     city = cityInfo['city']
     cLat = cityInfo['latitude']
     cLong = cityInfo['longitude']
-    
-    #https://api.ipgeolocation.io/astronomy?apiKey=API_KEY&lat=-27.4748&long=153.017'
-    #'https://api.ipgeolocation.io/astronomy?apiKey=API_KEY&lat=-27.4748&long=153.017'
-
 
     reqUrl = baseUrl + '?apiKey=' + myApiKey + '&lat=' + cLat + '&long=' + cLong
     r = requests.get(reqUrl)
-
     jData = r.json()
-    almanacDict.append(jData)
-    
     if r.ok :  
-      print('got it')
-
+      jData['city'] = city
+      almanacDict.append(jData)
     else:
       print('error from server', r.status_code)
       exit(1)
 
   return almanacDict
 
+def getRisesSets(almanacDict):
+
+  for cityInfo in almanacDict:
+    print(cityInfo['city'])
+    print(cityInfo['sunrise'], cityInfo['sunset'] )
+    print(cityInfo['moonrise'], cityInfo['moonset'])
+    print()
+
 
 def main():
 
   astroCoords = getKeyAndCities()
   almanacDict = currentRisesSets(astroCoords)
-
+  getRisesSets(almanacDict)
 
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':
