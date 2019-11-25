@@ -29,7 +29,7 @@ use open weather (https://openweathermap.org/) and an api key to get weather for
 }
 ```
 
-nb: for city id consonsult : https://openweathermap.org/current#cityid
+nb: for city id consult : https://openweathermap.org/current#cityid
 
 **getAstroInfo**
 
