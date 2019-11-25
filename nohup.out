@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/pfs/Documents/backToPython/lcdWords.py", line 10, in <module>
-    import I2C_LCD_driver
-ModuleNotFoundError: No module named 'I2C_LCD_driver'
