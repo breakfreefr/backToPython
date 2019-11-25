@@ -17,13 +17,24 @@ will write new set of phrases to the lcd module every second, scrolling down.
 
 **getWeather**
 
-use open weather and api key to get weather for cities listed in the ../key directory 
+use open weather (https://openweathermap.org/) and an api key to get weather for cities listed in the ../key directory, check 
+
+```
+{
+  "key": "xxxxxxxxxxxxxxxxxxxx",
+  "cities": {
+    "York": "2633352",
+    "Geneva": "6458784"
+  }
+}
+```
+
+nb: for city id consonsult : https://openweathermap.org/current#cityid
 
 **getAstroInfo**
 
-uses https://ipgeolocation.io and api key to get sunrise, sunset, moonrise, moonset for listed cities in key file
+uses https://ipgeolocation.io and api key to get sunrise, sunset, moonrise, moonset for listed cities in a json key file:
 
-which should be in format :
 ```
 {
   "comment": "key info to get sun and moon rising and setting",
