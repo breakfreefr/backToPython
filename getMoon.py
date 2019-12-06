@@ -106,21 +106,26 @@ def currentRisesSets(astroCoords):
 
   r = requests.get(reqUrl)
   jData = r.json()
+  print("")
+  print(jData['astronomy']['astronomy'])
+  print("")
   if r.ok :  
-    almanacDict = jData['astronomy']['astronomy'][0]
+    almanacDictArray = jData['astronomy']['astronomy']
     # swap for region, instead of Lancy
-    almanacDict['city'] = jData['astronomy']['city']
+    almanacDictArray[0]['city'] = jData['astronomy']['city']
   else:
     print('error from server', r.status_code)
     exit(1)
-  return almanacDict
+  return almanacDictArray
 
-def getRisesSets(almanacDict):
+def printRisesSets(almanacDictArray):
 
-  print(almanacDict['city'])
-  print('sun: ', almanacDict['sunrise'], almanacDict['sunset'] )
-  print('moon: ', almanacDict['moonrise'], almanacDict['moonset'], almanacDict['moonPhaseDesc'])
-  print()
+  print(almanacDictArray[0]['city'])
+  for almanacDict in almanacDictArray:
+    print('Date: ', almanacDict['utcTime'], end = ' ')
+    print('sun: ', almanacDict['sunrise'], almanacDict['sunset'], end = ' ')
+    print('moon: ', almanacDict['moonrise'], almanacDict['moonset'], almanacDict['moonPhaseDesc'])
+    print()
   return
 
 
@@ -128,7 +133,7 @@ def main():
 
   astroCoords = getKeyAndCities()
   almanacDict = currentRisesSets(astroCoords)
-  getRisesSets(almanacDict)
+  printRisesSets(almanacDict)
 
 # This is the standard boilerplate that calls the main() function.
 if __name__ == '__main__':
